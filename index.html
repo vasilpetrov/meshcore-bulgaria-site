@@ -653,11 +653,23 @@ window.addEventListener('load', function() {
   <h2>Настройки на мрежата</h2>
   <p class="section-subtitle">Конфигурация за свързване към MeshCore България</p>
   <div class="content-section" style="padding-top:0">
+    <p><strong>Настройки за клиенти (companion firmware)</strong></strong></p>
     <p>Използваният preset e <strong>EU/UK (Narrow), Switzerland</strong></p>
     <p>Frequency: <code>869.618</code><br>
     Bandwidth: <code>62.5kHz</code><br>
     Spreading factor: <code>8</code><br>
     Coding rate: <code>8</code></p>
+    <br>
+    <br>
+    <p><strong>Настройки за репитри (repeater firmware)</strong></strong></p>
+    <p>Използваният preset също e <strong>EU/UK (Narrow), Switzerland</strong></p>
+    <p>Освен това с цел оптимизация на мрежата, е желателно да зададете следните настройки:</p>
+    <p>Advert intervals: <code>Zero hop: 0 (disabled) ; Flood: 24h</code><br>
+      From command line:<br>
+      <code>set path.hash.mode 1</code> - Allow the repeater to use 2-byte hashes for paths, which can reduce path lengths and improve performance in larger networks<br>
+      <code>set loop.detect minimal</code> - Enable minimal loop detection to prevent routing loops while minimizing overhead. This is especially beneficial in larger networks where loops can cause significant issues<br>
+      <code>powersaving on</code> - Beneficial for battery powered repeaters. This is on by default if you are already using the Powersaving firmware <br>
+
   </div>
 </div>
 
