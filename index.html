@@ -99,7 +99,7 @@ a:hover { color: var(--primary-blue-light); }
 .banner.hidden { display: none; }
 .banner-text {
   display: inline-block;
-  animation: scroll 30s linear infinite;
+  animation: scroll 45s linear infinite;
   white-space: pre;
   padding: 0 50px;
 }
@@ -492,7 +492,7 @@ code {
 <body>
 <canvas id="mesh-canvas"></canvas>
 <div class="banner" id="banner">
-  <div class="banner-text" id="bannerText">Моля, ъпдейтнете си всички устройства с фърмуер > 1.14                  Това е необходимо, за да можем в близко бъдеще да преминем към 2-байтов хеш за имената на репитрите                  Подробно описание на функцията <a href="https://www.facebook.com/groups/meshcore/posts/2546138609137532/" target="_blank" rel="noopener noreferrer">ТУК</a></div>
+  <div class="banner-text" id="bannerText">Важно! Започваме да използваме региони. Повече информация в секциите с настройки и канали.                  Моля, ъпдейтнете си всички устройства с фърмуер > 1.14                  Това е необходимо, за да можем в близко бъдеще да преминем към 2-байтов хеш за имената на репитрите                  Подробно описание на функцията <a href="https://www.facebook.com/groups/meshcore/posts/2546138609137532/" target="_blank" rel="noopener noreferrer">ТУК</a></div>
 </div>
 <script>
 window.addEventListener('load', function() {
@@ -666,11 +666,14 @@ window.addEventListener('load', function() {
       <code>set loop.detect minimal</code> - Enable minimal loop detection to prevent routing loops while minimizing overhead. This is especially beneficial in larger networks where loops can cause significant issues<br>
       <code>powersaving on</code> - Beneficial for battery powered repeaters. This is on by default if you are already using the Powersaving firmware. Use with caution, may cause issues! <br>
       <br>
-      <strong>Добавяне на регион bg</strong><br>
+      <strong>Добавяне на регион bg (за рипиитър)</strong><br>
       <code>region put bg</code> - добавя регион bg<br>
-      <code>region save</code> - запаметява настройките за добавения регион<br>
+       <code>region save</code> - запаметява настройките за добавения регион<br>
+       <br>
+       <strong>Какво представляват регионите и за какво се ползват</strong><br>
+       Регионите позволяват на рипиитърите да разделят мрежата на логически сегменти, което подобрява маршрутизирането и намалява ненужния трафик. Всеки регион обхваща определена географска област.<br>
 
-  </div>
+   </div>
 </div>
 
 <!-- Channels -->
@@ -678,21 +681,21 @@ window.addEventListener('load', function() {
   <h2>Публични канали</h2>
   <p class="section-subtitle">Присъединете се към разговора</p>
   <div class="content-section" style="padding-top:0">
-     <p>Освен default канала <strong>Public</strong>, използваме и следните публични канали:</p>
-       <p><strong>#bulgaria</strong><br>Канал за България</p>
-       <p><strong>#sofia</strong><br>Канал за гр. София</p>
-        <p><strong>#plovdiv</strong><br>Канал за гр. Пловдив</p>
-      <p><strong>#emergency</strong><br>Само за извънредни ситуации</p>
-       <p><strong>#dx</strong><br>Канал за далечни връзки и тестове</p>
-     <p><strong>#hacktheplanet</strong><br>Инженерни дискусии :)</p>
-     <p><strong>#hamradio</strong><br>Радио любителски дискусии</p>
-     <p><strong>#lzham</strong><br>Канал за български радио любители</p>
-       <p><strong>#test</strong><br>За тестване и всякакъв спам, чието място не е в общия канал</p>
-       <p><strong>#bot</strong><br>Канал с бот, който отговаря на <a href="https://github.com/agessaman/meshcore-bot/blob/main/docs/command-reference.md" target="_blank" rel="noopener noreferrer">следните команди</a></p>
-        <p><strong>#plovdivbot</strong><br>Канал с бот за гр. Пловдив</p>
-        <p><strong>#romania</strong><br>Канал за Румъния</p>
-        <p><strong>#craiova-bot</strong><br>Бот за Крайова</p>
-        <p><strong>#serbia</strong><br>Канал за Сърбия</p>
+     <p>Освен default канала <strong>Public</strong>(без регион), използваме и следните публични канали:</p>
+       <p><strong>#bulgaria</strong><br>Канал за България (регион bg)</p>
+       <p><strong>#sofia</strong><br>Канал за гр. София (регион bg)</p>
+        <p><strong>#plovdiv</strong><br>Канал за гр. Пловдив (регион bg)</p>
+      <p><strong>#emergency</strong><br>Само за извънредни ситуации (без регион)</p>
+       <p><strong>#dx</strong><br>Канал за далечни връзки и тестове (без регион)</p>
+     <p><strong>#hacktheplanet</strong><br>Инженерни дискусии :) (регион bg)</p>
+     <p><strong>#hamradio</strong><br>Радио любителски дискусии (без регион)</p>
+     <p><strong>#lzham</strong><br>Канал за български радио любители (регион bg)</p>
+       <p><strong>#test</strong><br>Канал за тестове (без регион)</p>
+       <p><strong>#bot</strong><br>Канал с бот, който отговаря на <a href="https://github.com/agessaman/meshcore-bot/blob/main/docs/command-reference.md" target="_blank" rel="noopener noreferrer">следните команди</a> (регион bg)</p>
+        <p><strong>#plovdivbot</strong><br>Канал с бот за гр. Пловдив (регион bg)</p>
+        <p><strong>#romania</strong><br>Канал за Румъния (регион ro)</p>
+        <p><strong>#craiova-bot</strong><br>Бот за Крайова (регион ro)</p>
+        <p><strong>#serbia</strong><br>Канал за Сърбия (без регион)</p>
    </div>
 </div>
 
