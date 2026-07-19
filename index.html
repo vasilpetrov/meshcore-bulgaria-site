@@ -112,7 +112,7 @@ a:hover { color: var(--primary-blue-light); }
 .header {
   background: rgba(15, 23, 42, 0.95);
   backdrop-filter: blur(10px);
-  padding: 0 24px;
+  padding: 0 16px;
   position: fixed;
   top: 0;
   left: 0;
@@ -133,7 +133,7 @@ body:not(.banner-hidden) .banner ~ .header { top: auto; }
   max-width: 1200px;
   margin: 0 auto;
   padding: 10px 0;
-  gap: 20px;
+  gap: 12px;
 }
 .header-left {
   display: flex;
@@ -154,23 +154,24 @@ body:not(.banner-hidden) .banner ~ .header { top: auto; }
 .nav {
   display: flex;
   align-items: center;
-  flex-wrap: wrap;
-  gap: 4px;
+  flex-wrap: nowrap;
+  gap: 2px;
 }
 .nav a {
   color: var(--text-secondary);
   text-decoration: none;
   font-weight: 500;
-  font-size: 0.85rem;
-  padding: 6px 10px;
+  font-size: 0.82rem;
+  padding: 6px 7px;
   border-radius: 6px;
   transition: background 0.2s, color 0.2s;
+  white-space: nowrap;
 }
 .nav a:hover { background: var(--card-bg); color: var(--primary-blue); }
 .nav .nav-cta {
   background: var(--primary-blue);
   color: #000;
-  padding: 6px 14px;
+  padding: 6px 10px;
   border-radius: 8px;
   font-weight: 600;
 }
@@ -473,8 +474,9 @@ code {
 @media (max-width: 768px) {
   body { padding-top: 70px; }
   .header-inner { flex-direction: column; padding: 8px 0; gap: 8px; }
-  .nav { justify-content: center; gap: 2px; }
-  .nav a { font-size: 0.78rem; padding: 4px 8px; }
+  .nav { justify-content: flex-start; gap: 2px; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+  .nav::-webkit-scrollbar { display: none; }
+  .nav a { font-size: 0.78rem; padding: 4px 8px; flex-shrink: 0; }
   .hero h1 { font-size: 2rem; }
   .hero p { font-size: 1rem; }
   .section { padding: 40px 16px; }
@@ -527,6 +529,7 @@ window.addEventListener('load', function() {
 
       <a href="#links">Връзки</a>
       <a href="https://pic.meshcore.bg/" target="_blank" rel="noopener">Image Hosting</a>
+      <a href="https://corescope.malinovi.com/" target="_blank" rel="noopener">CoreScope</a>
       <a href="https://blog.meshcore.io" target="_blank" rel="noopener">Blog</a>
       <a href="https://docs.meshcore.io" target="_blank" rel="noopener">Docs</a>
       <a href="https://meshcore.io/flasher" target="_blank" rel="noopener">Flasher</a>
@@ -715,6 +718,7 @@ window.addEventListener('load', function() {
       <li><a href="https://github.com/kekelback/meshcore-bulgaria-site/" target="_blank" rel="noopener noreferrer">meshcore.bg on github</a></li>
       <li><a href="https://pic.meshcore.bg" target="_blank" rel="noopener noreferrer">Image hosting (pic.meshcore.bg)</a></li>
       <li><a href="https://trace.meshcore.bg" target="_blank" rel="noopener noreferrer">Line of sight calculation</a></li>
+      <li><a href="https://corescope.malinovi.com/" target="_blank" rel="noopener noreferrer">Corescope анализатор</a></li>
     </ul>
   </div>
 </div>
