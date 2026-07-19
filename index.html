@@ -150,6 +150,7 @@ body:not(.banner-hidden) .banner ~ .header { top: auto; }
   margin: 0;
   font-size: 0.75rem;
   color: var(--text-secondary);
+  white-space: nowrap;
 }
 .nav {
   display: flex;
@@ -176,6 +177,44 @@ body:not(.banner-hidden) .banner ~ .header { top: auto; }
   font-weight: 600;
 }
 .nav .nav-cta:hover { background: var(--primary-blue-light); color: #000; }
+
+/* Language switcher */
+.lang-switcher {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  margin-left: 4px;
+  position: relative;
+}
+.lang-switcher select {
+  appearance: none;
+  -webkit-appearance: none;
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  color: var(--text-secondary);
+  padding: 5px 24px 5px 8px;
+  font-size: 0.82rem;
+  font-family: inherit;
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.lang-switcher select:hover { border-color: var(--primary-blue); }
+.lang-switcher select option {
+  background: var(--card-bg);
+  color: var(--text-primary);
+}
+.lang-switcher::after {
+  content: '\25BC';
+  position: absolute;
+  right: 6px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.5rem;
+  color: var(--text-secondary);
+  pointer-events: none;
+}
 
 /* Section common */
 .section {
@@ -537,8 +576,27 @@ window.addEventListener('load', function() {
       <a href="https://map.meshcore.io" target="_blank" rel="noopener">Map</a>
       <a href="https://app.meshcore.nz" target="_blank" rel="noopener" class="nav-cta">Launch App</a>
     </nav>
+    <div class="lang-switcher">
+      <select id="langSelect" onchange="switchLanguage(this.value)">
+        <option value="bg">&#x1F1E7;&#x1F1EC; BG</option>
+        <option value="ro">&#x1F1F7;&#x1F1F4; RO</option>
+        <option value="sr">&#x1F1F7;&#x1F1F8; RS</option>
+      </select>
+    </div>
   </div>
 </header>
+
+<script>
+function switchLanguage(targetLang) {
+  if (targetLang === 'bg') {
+    window.location.href = window.location.href.replace(/[?&]lang=.*/,'').replace(/\?$/,'');
+    return;
+  }
+  var url = 'https://www.meshcore.bg' + window.location.pathname + window.location.hash;
+  var translateUrl = 'https://translate.google.com/translate?hl=' + targetLang + '&sl=auto&tl=' + targetLang + '&u=' + encodeURIComponent(url);
+  window.location.href = translateUrl;
+}
+</script>
 
 <!-- Hero -->
 <section class="hero">
