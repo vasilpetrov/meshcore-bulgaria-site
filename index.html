@@ -112,7 +112,7 @@ a:hover { color: var(--primary-blue-light); }
 .header {
   background: rgba(15, 23, 42, 0.95);
   backdrop-filter: blur(10px);
-  padding: 0 24px;
+  padding: 0 16px;
   position: fixed;
   top: 0;
   left: 0;
@@ -133,7 +133,7 @@ body:not(.banner-hidden) .banner ~ .header { top: auto; }
   max-width: 1200px;
   margin: 0 auto;
   padding: 10px 0;
-  gap: 20px;
+  gap: 12px;
 }
 .header-left {
   display: flex;
@@ -150,31 +150,71 @@ body:not(.banner-hidden) .banner ~ .header { top: auto; }
   margin: 0;
   font-size: 0.75rem;
   color: var(--text-secondary);
+  white-space: nowrap;
 }
 .nav {
   display: flex;
   align-items: center;
-  flex-wrap: wrap;
-  gap: 4px;
+  flex-wrap: nowrap;
+  gap: 2px;
 }
 .nav a {
   color: var(--text-secondary);
   text-decoration: none;
   font-weight: 500;
-  font-size: 0.85rem;
-  padding: 6px 10px;
+  font-size: 0.82rem;
+  padding: 6px 7px;
   border-radius: 6px;
   transition: background 0.2s, color 0.2s;
+  white-space: nowrap;
 }
 .nav a:hover { background: var(--card-bg); color: var(--primary-blue); }
 .nav .nav-cta {
   background: var(--primary-blue);
   color: #000;
-  padding: 6px 14px;
+  padding: 6px 10px;
   border-radius: 8px;
   font-weight: 600;
 }
 .nav .nav-cta:hover { background: var(--primary-blue-light); color: #000; }
+
+/* Language switcher */
+.lang-switcher {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  margin-left: 4px;
+  position: relative;
+}
+.lang-switcher select {
+  appearance: none;
+  -webkit-appearance: none;
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 6px;
+  color: var(--text-secondary);
+  padding: 5px 24px 5px 8px;
+  font-size: 0.82rem;
+  font-family: inherit;
+  cursor: pointer;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.lang-switcher select:hover { border-color: var(--primary-blue); }
+.lang-switcher select option {
+  background: var(--card-bg);
+  color: var(--text-primary);
+}
+.lang-switcher::after {
+  content: '\25BC';
+  position: absolute;
+  right: 6px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.5rem;
+  color: var(--text-secondary);
+  pointer-events: none;
+}
 
 /* Section common */
 .section {
@@ -473,8 +513,9 @@ code {
 @media (max-width: 768px) {
   body { padding-top: 70px; }
   .header-inner { flex-direction: column; padding: 8px 0; gap: 8px; }
-  .nav { justify-content: center; gap: 2px; }
-  .nav a { font-size: 0.78rem; padding: 4px 8px; }
+  .nav { justify-content: flex-start; gap: 2px; overflow-x: auto; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+  .nav::-webkit-scrollbar { display: none; }
+  .nav a { font-size: 0.78rem; padding: 4px 8px; flex-shrink: 0; }
   .hero h1 { font-size: 2rem; }
   .hero p { font-size: 1rem; }
   .section { padding: 40px 16px; }
@@ -492,7 +533,7 @@ code {
 <body>
 <canvas id="mesh-canvas"></canvas>
 <div class="banner" id="banner">
-  <div class="banner-text" id="bannerText">Важно! Започваме да използваме региони. Повече информация в секциите с настройки и канали.                  Моля, ъпдейтнете си всички устройства с фърмуер > 1.14                  Това е необходимо, за да можем в близко бъдеще да преминем към 2-байтов хеш за имената на репитрите                  Подробно описание на функцията <a href="https://www.facebook.com/groups/meshcore/posts/2546138609137532/" target="_blank" rel="noopener noreferrer">ТУК</a></div>
+  <div class="banner-text" id="bannerText">Важно! Започваме да използваме региони. Повече информация в секциите с настройки, канали и региони.                  Моля, ъпдейтнете си всички устройства с фърмуер > 1.14                  Това е необходимо, за да можем в близко бъдеще да преминем към 2-байтов хеш за имената на репитрите                  Подробно описание на функцията <a href="https://www.facebook.com/groups/meshcore/posts/2546138609137532/" target="_blank" rel="noopener noreferrer">ТУК</a></div>
 </div>
 <script>
 window.addEventListener('load', function() {
@@ -524,17 +565,38 @@ window.addEventListener('load', function() {
       <a href="#features">Характеристики</a>
       <a href="#setup">Настройки</a>
       <a href="#channels">Канали</a>
+      <a href="#regions">Региони</a>
 
       <a href="#links">Връзки</a>
       <a href="https://pic.meshcore.bg/" target="_blank" rel="noopener">Image Hosting</a>
+      <a href="https://corescope.malinovi.com/" target="_blank" rel="noopener">CoreScope</a>
       <a href="https://blog.meshcore.io" target="_blank" rel="noopener">Blog</a>
       <a href="https://docs.meshcore.io" target="_blank" rel="noopener">Docs</a>
       <a href="https://meshcore.io/flasher" target="_blank" rel="noopener">Flasher</a>
       <a href="https://map.meshcore.io" target="_blank" rel="noopener">Map</a>
       <a href="https://app.meshcore.nz" target="_blank" rel="noopener" class="nav-cta">Launch App</a>
     </nav>
+    <div class="lang-switcher">
+      <select id="langSelect" onchange="switchLanguage(this.value)">
+        <option value="bg">&#x1F1E7;&#x1F1EC; BG</option>
+        <option value="ro">&#x1F1F7;&#x1F1F4; RO</option>
+        <option value="sr">&#x1F1F7;&#x1F1F8; RS</option>
+      </select>
+    </div>
   </div>
 </header>
+
+<script>
+function switchLanguage(targetLang) {
+  if (targetLang === 'bg') {
+    window.location.href = window.location.href.replace(/[?&]lang=.*/,'').replace(/\?$/,'');
+    return;
+  }
+  var url = 'https://www.meshcore.bg' + window.location.pathname + window.location.hash;
+  var translateUrl = 'https://translate.google.com/translate?hl=' + targetLang + '&sl=auto&tl=' + targetLang + '&u=' + encodeURIComponent(url);
+  window.location.href = translateUrl;
+}
+</script>
 
 <!-- Hero -->
 <section class="hero">
@@ -670,8 +732,6 @@ window.addEventListener('load', function() {
       <code>region put bg</code> - добавя регион bg<br>
        <code>region save</code> - запаметява настройките за добавения регион<br>
        <br>
-       <strong>Какво представляват регионите и за какво се ползват</strong><br>
-       Регионите позволяват на рипиитърите да разделят мрежата на логически сегменти, което подобрява маршрутизирането и намалява ненужния трафик. Всеки регион обхваща определена географска област.<br>
 
    </div>
 </div>
@@ -685,6 +745,7 @@ window.addEventListener('load', function() {
        <p><strong>#bulgaria</strong><br>Канал за България (регион bg)</p>
        <p><strong>#sofia</strong><br>Канал за гр. София (регион bg)</p>
         <p><strong>#plovdiv</strong><br>Канал за гр. Пловдив (регион bg)</p>
+        <p><strong>#vratsa</strong><br>Канал за гр. Враца (регион bg)</p>
       <p><strong>#emergency</strong><br>Само за извънредни ситуации (без регион)</p>
        <p><strong>#dx</strong><br>Канал за далечни връзки и тестове (без регион)</p>
      <p><strong>#hacktheplanet</strong><br>Инженерни дискусии :) (регион bg)</p>
@@ -697,6 +758,84 @@ window.addEventListener('load', function() {
         <p><strong>#craiova-bot</strong><br>Бот за Крайова (регион ro)</p>
         <p><strong>#serbia</strong><br>Канал за Сърбия (без регион)</p>
    </div>
+</div>
+
+<!-- Региони -->
+<div class="section" id="regions">
+  <h2>Региони</h2>
+  <p class="section-subtitle">Как работят регионите в MeshCore и защо са важни</p>
+  <div class="content-section" style="padding-top:0">
+    <h3>Какво представляват регионите?</h3>
+    <p>Регионите са механизъм в MeshCore, който позволява на рипиитърите (repeater-ите) да филтрират трафика на базата на географски тагове. Всеки рипиитър може да бъде конфигуриран с един или повече региони, които определят какъв трафик ще препредава.</p>
+    <p>Когато даден рипиитър получи съобщение, то носи таг на региона, от който идва (например <code>bg</code> за България, <code>ro</code> за Румъния, <code>rs</code> за Сърбия). Рипиитърът проверява дали този таг съвпада с някой от конфигурираните му региони и решава дали да препредаде съобщението.</p>
+
+    <h3>За какво се използват регионите?</h3>
+    <p>Регионите решават няколко важни проблема в mesh мрежите:</p>
+    <ul>
+      <li><strong>Намаляване на ненужния трафик</strong> — без региони, всяко съобщение се разпространява из цялата мрежа, дори до рипиитъри, които са на стотици километри и нямат връзка с подателя или получателя. Това претоварва мрежата.</li>
+      <li><strong>Подобряване на маршрутизирането</strong> — регионите помагат на рипиитърите да взимат по-интелигентни решения за това накъде да препратят трафика.</li>
+      <li><strong>Логическо сегментиране на мрежата</strong> — позволява големи mesh мрежи да бъдат разделени на по-малки, управляеми сегменти по географски принцип.</li>
+    </ul>
+
+    <h3>Специалният регион <code>*</code> (звезда)</h3>
+    <p>Регионът <code>*</code> означава "всички региони". Рипиитър с настроен <code>*</code> ще препредава трафик от и към всеки регион. Това е особено важно за:</p>
+    <ul>
+      <li>Трафик, който не е тагнат с конкретен регион (глобален/public трафик)</li>
+      <li>Рипиитъри, които са на границата между няколко региона</li>
+      <li>Поддържане на свързаност между различните регионални мрежи</li>
+    </ul>
+
+    <h3>Примери за конфигурация</h3>
+    <p><strong>Пример 1: Рипиитър само за България (<code>*</code> и <code>bg</code>)</strong></p>
+    <p>Рипиитър с региони <code>* bg</code>:</p>
+    <ul>
+      <li>Препредава целия глобален трафик (благодарение на <code>*</code>)</li>
+      <li>Препредава трафик тагнат с <code>bg</code></li>
+      <li><strong>Филтрира (НЕ препредава)</strong> трафик тагнат с <code>ro</code> или <code>rs</code>, тъй като тези региони не са в списъка му</li>
+    </ul>
+    <p>Това означава, че ако рипиитър в Румъния изпрати съобщение тагнато с <code>ro</code>, български рипиитър с <code>* bg</code> <strong>няма да го препредаде</strong>. Така румънският локален трафик си остава в Румъния и не претоварва българската мрежа.</p>
+
+    <p><strong>Пример 2: Граничен рипиитър (<code>* bg ro rs</code>)</strong></p>
+    <p>Рипиитър, който се намира на границата между България, Румъния и Сърбия, трябва да бъде конфигуриран с <code>* bg ro rs</code>:</p>
+    <ul>
+      <li>Препредава глобален трафик (<code>*</code>)</li>
+      <li>Препредава трафик от/към България (<code>bg</code>)</li>
+      <li>Препредава трафик от/към Румъния (<code>ro</code>)</li>
+      <li>Препредава трафик от/към Сърбия (<code>rs</code>)</li>
+    </ul>
+    <p>Граничните рипиитъри са критични за междурегионалната свързаност. Те действат като "мост" между различните национални мрежи, позволявайки на съобщения да преминават границите, когато е необходимо.</p>
+
+    <h3>Защо премахването на <code>*</code> е лоша идея?</h3>
+    <p>Може да си помислите, че ако сте в България, ви трябва само <code>bg</code>. Но премахването на <code>*</code> има сериозни последствия:</p>
+    <ul>
+      <li><strong>Губите глобалния/public трафик</strong> — много съобщения (особено в public канала) не са тагнати с конкретен регион. Без <code>*</code>, вашият рипиитър няма да ги препредава и ще се изолирате от голяма част от мрежата.</li>
+      <li><strong>Прекъсвате свързаността</strong> — ако всички рипиитъри в даден регион махнат <code>*</code>, мрежата се фрагментира и комуникацията между регионите спира напълно.</li>
+      <li><strong>Изолирате нови потребители</strong> — нови устройства, които все още нямат конфигуриран регион, няма да могат да комуникират през вашия рипиитър.</li>
+      <li><strong>Спешни съобщения (emergency)</strong> — emergency каналът често е без регион, за да достигне до максимален брой хора. Без <code>*</code> вие няма да получавате тези критични съобщения.</li>
+    </ul>
+
+    <h3>Препоръчителна конфигурация</h3>
+    <p>За повечето рипиитъри в България препоръчителната конфигурация е <code>* bg</code>:</p>
+    <ul>
+      <li><code>*</code> — за глобален трафик и съобщения без регион</li>
+      <li><code>bg</code> — за регионален трафик в България</li>
+    </ul>
+    <p>За гранични рипиитъри (близо до Румъния или Сърбия): <code>* bg ro rs</code></p>
+    <p>За рипиитъри в други държави — заменете <code>bg</code> със съответния код на държавата и добавете съседни региони ако сте на граница.</p>
+
+    <h3>Команди за настройка</h3>
+    <p>От командния ред на рипиитъра:</p>
+    <p><code>region put bg</code> — добавя регион bg<br>
+    <code>region put *</code> — добавя глобален регион (всички)<br>
+    <code>region del rg</code> — премахва регион (заменете rg с името на региона)<br>
+    <code>region list</code> — показва списък с текущите региони<br>
+    <code>region save</code> — запазва настройките</p>
+    <p><strong>За да настроите рипиитър с <code>* bg</code>:</strong></p>
+    <p><code>region put *</code><br>
+    <code>region put bg</code><br>
+    <code>region save</code></p>
+    <p>Вижте актуалната карта на регионите: <a href="https://regions.meshcore.nz/" target="_blank" rel="noopener noreferrer">regions.meshcore.nz</a></p>
+  </div>
 </div>
 
 <!-- Links -->
@@ -715,6 +854,8 @@ window.addEventListener('load', function() {
       <li><a href="https://github.com/kekelback/meshcore-bulgaria-site/" target="_blank" rel="noopener noreferrer">meshcore.bg on github</a></li>
       <li><a href="https://pic.meshcore.bg" target="_blank" rel="noopener noreferrer">Image hosting (pic.meshcore.bg)</a></li>
       <li><a href="https://trace.meshcore.bg" target="_blank" rel="noopener noreferrer">Line of sight calculation</a></li>
+      <li><a href="https://corescope.malinovi.com/" target="_blank" rel="noopener noreferrer">Corescope анализатор</a></li>
+      <li><a href="https://regions.meshcore.nz/" target="_blank" rel="noopener noreferrer">MeshCore Regions map</a></li>
     </ul>
   </div>
 </div>
